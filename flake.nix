@@ -1,10 +1,6 @@
 {
-  description = "Nix flake for v-diffusion-pytorch (upstream: crowsonkb/v-diffusion-pytorch)";
-
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
-
+  description = "Nix flake for v-diffusion-pytorch";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
@@ -19,10 +15,6 @@
         dependencies = with pkgs.python3Packages; [ torch ];
         pythonRelaxDeps = true;
         doCheck = false;
-      };
-
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = [ (pkgs.python3.withPackages (ps: with ps; [ torch ])) ];
       };
     };
 }
